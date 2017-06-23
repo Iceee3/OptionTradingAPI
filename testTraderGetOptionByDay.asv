@@ -1,0 +1,38 @@
+% Jianqiu Wang, jw2329@cornell.edu
+% Version 0.0.1 June 16, 2017  Get option list today during backtest
+% Version 0.0.2 June 19, 2017 Add test for traderGetOption
+% Version 0.0.3 June 20, 2017 Modify all date into 8-digit number type
+clear;clc;
+
+beginDate = 20150209;endDate = datenu;
+
+tic;
+[optionStructArray] = traderGetOptionByDay(beginDate, endDate);
+
+toc;
+
+currentDateList = [floor(datenum(now));
+                                  datenum('2017-02-13');
+                                  datenum('2017-06-14')];
+for i = 1:length(currentDateList)
+    currentDate = currentDateList(i)
+
+    monthLevel = 0;
+    priceLevel = 0;
+%     optionType = 'c';
+%     tic;
+%     [selectedTargetList] = traderGetOption(currentDate, monthLevel, priceLevel, optionType, optionStructArray)
+%     toc;
+%     optionType = 'p';
+% 
+%     tic;
+%     [selectedTargetList] = traderGetOption(currentDate, monthLevel, priceLevel, optionType, optionStructArray)
+%     toc;
+
+    sprintf(['On ',datestr(currentDate,'yyyymmdd'),'At the money contract will be:']);
+    optionType= 'all';
+    [selectedTargetList] = traderGetOption(currentDate, monthLevel, priceLevel, optionType, optionStructArray);
+    sprintf(selectedTargetList.Code)
+ 
+
+end
